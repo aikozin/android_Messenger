@@ -9,6 +9,10 @@ import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import retrofit2.Retrofit;
+
 public class ActivityLogin extends AppCompatActivity {
 
     @Override
