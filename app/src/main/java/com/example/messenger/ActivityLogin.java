@@ -77,7 +77,6 @@ public class ActivityLogin extends AppCompatActivity {
                                             String stringPassword = password.getText().toString();
                                         }
 
-
             }
         });
 
