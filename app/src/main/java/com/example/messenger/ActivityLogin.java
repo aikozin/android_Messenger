@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import retrofit2.Retrofit;
 
@@ -75,10 +72,35 @@ public class ActivityLogin extends AppCompatActivity {
                                             String stringNumber = number.getText().toString();
                                             String stringEmail = email.getText().toString();
                                             String stringPassword = password.getText().toString();
-                                        }
 
+
+                                        }
             }
         });
 
+    }
+    public String users_post_all(String stringNumber, String stringEmail, String stringPassword){
+        String string = "{\n" +
+                "    \"phone\": \"stringNumber\",\n" +
+                "    \"email\": \"stringEmail\",\n" +
+                "    \"password\": \"stringPassword\"\n" +
+                "}\n";
+        return string;
+    }
+    public String users_get_phone(String stringNumber, String stringEmail, String stringPassword){
+        String string = "{\n" +
+                "    \"phone\": \"stringNumber\",\n" +
+                "    \"email\": \"\",\n" +
+                "    \"password\": \"stringPassword\"\n" +
+                "}\n";
+        return string;
+    }
+    public String users_get_email(String stringNumber, String stringEmail, String stringPassword){
+        String string = "{\n" +
+                "    \"phone\": \"\",\n" +
+                "    \"email\": \"stringEmail\",\n" +
+                "    \"password\": \"stringPassword\"\n" +
+                "}\n";
+        return string;
     }
 }
