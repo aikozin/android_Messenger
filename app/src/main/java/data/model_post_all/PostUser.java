@@ -1,7 +1,11 @@
 package data.model_post_all;
 
+import com.example.messenger.ActivityLogin;
+import com.example.messenger.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class PostUser {
 
@@ -38,5 +42,4 @@ public class PostUser {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

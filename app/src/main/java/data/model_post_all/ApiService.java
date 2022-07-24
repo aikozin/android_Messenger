@@ -9,7 +9,7 @@ import retrofit2.http.Headers;
 
 public interface ApiService {
     @Headers("Content-Type: application/json")
-    @POST("auth/login") //путь вашего сервиса к авторизации
+    @POST("/user/")
     Call<PostUser> getToken(
             @Query("login") String login,
             @Query("password") String password);

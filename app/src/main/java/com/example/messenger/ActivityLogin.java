@@ -2,15 +2,27 @@ package com.example.messenger;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import data.model_post_all.*;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import retrofit2.Retrofit;
+import data.model_post_all.PostUser;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ActivityLogin extends AppCompatActivity {
+
+    private static String token;
+    private static boolean tokenAcquired;
+    private String stringNumber;
+    private String stringEmail;
+    private String stringPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,34 +85,41 @@ public class ActivityLogin extends AppCompatActivity {
                                             String stringEmail = email.getText().toString();
                                             String stringPassword = password.getText().toString();
 
-
+                                            getToken();
                                         }
             }
         });
+    }
 
+    private void getToken() {
+        Call<PostUser> call = ApiFactory.getService().getToken(stringEmail, stringPassword);
+        call.enqueue(new Callback<PostUser>() {
+            @Override
+            public void onResponse(Call<PostUser> call, Response<PostUser> response) {
+                if (response.isSuccessful()) {
+                    ActivityLogin.token = response.body().getData().getToken();
+                    ActivityLogin.tokenAcquired = true;
+                    Log.d("TOKEN", token);
+                    getTasks();
+                } else {
+                    ActivityLogin.token = "";
+                    ActivityLogin.tokenAcquired = false;
+                    Log.d("TOKEN", ErrorUtils.errorMessage(response));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostUser> call, Throwable t) {}
+        });
     }
-    public String users_post_all(String stringNumber, String stringEmail, String stringPassword){
-        String string = "{\n" +
-                "    \"phone\": \"stringNumber\",\n" +
-                "    \"email\": \"stringEmail\",\n" +
-                "    \"password\": \"stringPassword\"\n" +
-                "}\n";
-        return string;
-    }
-    public String users_get_phone(String stringNumber, String stringEmail, String stringPassword){
-        String string = "{\n" +
-                "    \"phone\": \"stringNumber\",\n" +
-                "    \"email\": \"\",\n" +
-                "    \"password\": \"stringPassword\"\n" +
-                "}\n";
-        return string;
-    }
-    public String users_get_email(String stringNumber, String stringEmail, String stringPassword){
-        String string = "{\n" +
-                "    \"phone\": \"\",\n" +
-                "    \"email\": \"stringEmail\",\n" +
-                "    \"password\": \"stringPassword\"\n" +
-                "}\n";
-        return string;
+
+    private void getTasks() {
+
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Успех!", Toast.LENGTH_SHORT);
+        toast.show();
+
+        //Здесь писать задачи, при успешном входе
+
     }
 }
