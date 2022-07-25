@@ -67,6 +67,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/Main_text_basic"
                 app:layout_constraintLeft_toLeftOf="@+id/Main_text_basic"
                 android:hint="Телефон"
+                android:text="+70000000000"
                 android:layout_marginTop="20dp"
                 android:inputType="phone"/>
             <EditText
@@ -85,6 +86,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/email"
                 app:layout_constraintLeft_toLeftOf="@+id/Main_text_basic"
                 android:hint="Пароль"
+                android:text="a"
                 android:layout_marginTop="5dp"
                 android:inputType="textPassword"/>
 
