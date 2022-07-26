@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="64dp">
+            android:layout_marginTop="48dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_image_logotype"
@@ -61,41 +61,54 @@
                 android:textSize="20dp"/>
 
             <EditText
-                android:id="@+id/number"
+                android:id="@+id/number_or_email"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/Main_text_basic"
                 app:layout_constraintLeft_toLeftOf="@+id/Main_text_basic"
-                android:hint="Телефон"
+                android:hint="Телефон или электронная почта"
                 android:text="+70000000000"
                 android:layout_marginTop="20dp"
-                android:inputType="phone"/>
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="256dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/number"
-                app:layout_constraintLeft_toLeftOf="@+id/Main_text_basic"
-                android:hint="Электронная почта"
-                android:layout_marginTop="5dp"
                 android:inputType="textEmailAddress"/>
+
+            <TextView
+                android:id="@+id/error_number_or_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="@+id/number_or_email"
+                app:layout_constraintRight_toRightOf="@+id/number_or_email"
+                app:layout_constraintTop_toBottomOf="@+id/number_or_email"
+                android:textColor="@color/Error_color"
+                android:layout_margin="25dp"/>
+
             <EditText
                 android:id="@+id/password"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/email"
+                app:layout_constraintTop_toBottomOf="@+id/error_number_or_email"
                 app:layout_constraintLeft_toLeftOf="@+id/Main_text_basic"
                 android:hint="Пароль"
                 android:text="a"
-                android:layout_marginTop="5dp"
-                android:inputType="textPassword"/>
+                android:layout_marginTop="20dp"
+                android:inputType="textPassword"
+                android:maxLength="7"/>
+
+            <TextView
+                android:id="@+id/error_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="@+id/number_or_email"
+                app:layout_constraintRight_toRightOf="@+id/number_or_email"
+                app:layout_constraintTop_toBottomOf="@+id/password"
+                android:textColor="@color/Error_color"
+                android:layout_margin="25dp"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="256dp"
                 android:layout_height="48dp"
                 app:layout_constraintLeft_toLeftOf="@+id/password"
-                app:layout_constraintTop_toBottomOf="@+id/password"
-                android:layout_marginTop="18dp"
+                app:layout_constraintTop_toBottomOf="@+id/error_password"
+                android:layout_marginTop="25dp"
                 app:cardCornerRadius="8dp">
 
                 <ImageView

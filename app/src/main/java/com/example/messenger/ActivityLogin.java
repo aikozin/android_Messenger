@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.messenger.api.RetrofitClient;
@@ -36,13 +37,55 @@ public class ActivityLogin extends AppCompatActivity {
         button_authorization.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText number = findViewById(R.id.number);
-                EditText email = findViewById(R.id.email);
+                EditText number_or_email = findViewById(R.id.number_or_email);
                 EditText password = findViewById(R.id.password);
 
-                String stringPhone = number.getText().toString();
-                String stringEmail = email.getText().toString();
-                String stringPassword = password.getText().toString();
+                TextView error_number_or_email = findViewById(R.id.error_number_or_email);
+                TextView error_password = findViewById(R.id.error_password);
+
+                error_number_or_email.setText("");
+                error_password.setText("");
+
+                String stringPhone = "";
+                String stringEmail = "";
+                String stringPassword = "";
+
+                /*
+                if (number_or_email.getText().toString().equals("") == true ){
+                    error_number_or_email.setText("Данное поле обязательно для заполнения"); // не заполнен телефон или почта
+                } else if (number_or_email.getText().toString().substring(0,2).equals("+7") == true) {
+                    stringPhone = number_or_email.getText().toString();
+                } else if (number_or_email.getText().toString().indexOf('@') != 0 || number_or_email.getText().toString().indexOf('@') != -1 || number_or_email.getText().toString().indexOf('.') != 0 || number_or_email.getText().toString().indexOf('.') != -1 ||  number_or_email.getText().toString().indexOf('.') != number_or_email.getText().toString().length()){
+                    error_number_or_email.setText("Введите верный номер телефона или email"); // неверно заполнен телефон или почта
+                } else {
+                    stringEmail = number_or_email.getText().toString();
+                }
+
+                if (password.getText().toString().equals("")) {
+                    error_password.setText("Введите пароль"); // не заполнен пароль
+                } else {
+                    char[] mas_incoming = password.getText().toString().toCharArray();
+                    String variables = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+                    char[] mas_outgoing = variables.toCharArray();
+                    boolean logic;
+                    int kol = 0;
+                    for (int j = 0; j < 94; j++) {
+                        for (int i = 0; i < password.getText().toString().length(); i++) {
+                            logic = false;
+                            if (mas_incoming[i] == mas_outgoing[j]){
+                                logic = true;
+                            }
+                            if (logic == true){
+                                kol++;
+                            }
+                        }
+                    }
+                    if (kol != mas_incoming.length + 1)
+                        error_password.setText("Введите пароль, длиной более 7 символов, состоящий из букв (A-z), цифр (0-9) и спец. символов"); // неверно заполнен пароль
+                    else
+                        stringPassword = password.getText().toString();
+                }
+                */
 
                 authorizate(stringPhone, stringEmail, stringPassword);
             }

@@ -12,4 +12,5 @@
     <color name="Main_elements">#E4DA9746</color>
     <color name="Main_text_header">#EE5B2AB3</color>
     <color name="Main_text_basic">#E27E2AB3</color>
+    <color name="Error_color">#E2D80E0E</color>
 </resources>
