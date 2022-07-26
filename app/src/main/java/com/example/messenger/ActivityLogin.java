@@ -50,89 +50,110 @@ public class ActivityLogin extends AppCompatActivity {
                 String stringEmail = "";
                 String stringPassword = "";
 
-                /*
-                if (number_or_email.getText().toString().equals("") == true ){
-                    error_number_or_email.setText("Данное поле обязательно для заполнения"); // не заполнен телефон или почта
-                } else if (number_or_email.getText().toString().substring(0,2).equals("+7") == true) {
-                    stringPhone = number_or_email.getText().toString();
-                } else if (number_or_email.getText().toString().indexOf('@') != 0 || number_or_email.getText().toString().indexOf('@') != -1 || number_or_email.getText().toString().indexOf('.') != 0 || number_or_email.getText().toString().indexOf('.') != -1 ||  number_or_email.getText().toString().indexOf('.') != number_or_email.getText().toString().length()){
-                    error_number_or_email.setText("Введите верный номер телефона или email"); // неверно заполнен телефон или почта
-                } else {
-                    stringEmail = number_or_email.getText().toString();
-                }
+                String experimental_phone_or_email = number_or_email.getText().toString();
+                String experimental_password = password.getText().toString();
 
-                if (password.getText().toString().equals("")) {
-                    error_password.setText("Введите пароль"); // не заполнен пароль
+                if (experimental_phone_or_email.equals("")) {
+                    error_number_or_email.setText("Данное поле обязательно для заполнения");
                 } else {
-                    char[] mas_incoming = password.getText().toString().toCharArray();
-                    String variables = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-                    char[] mas_outgoing = variables.toCharArray();
-                    boolean logic;
-                    int kol = 0;
-                    for (int j = 0; j < 94; j++) {
-                        for (int i = 0; i < password.getText().toString().length(); i++) {
-                            logic = false;
-                            if (mas_incoming[i] == mas_outgoing[j]){
-                                logic = true;
+                    char[] mas_char_1 = experimental_phone_or_email.toCharArray();
+                    if (mas_char_1[0] == '+') {
+                        char[] mas_Char_2 = {'+', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+                        char[] mas_char_symbol = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+                        for (int i = 1; i <= 12; i++) {
+                            for (int j = 0; j <= 9; j++) {
+                                if (mas_char_1[i] == mas_char_symbol[j]) {
+                                    mas_Char_2[i] = mas_char_symbol[j];
+                                }
                             }
-                            if (logic == true){
-                                kol++;
+                            if (mas_Char_2[i] == ' ') {
+                                error_number_or_email.setText("Введите верный номер телефона или email");
+                            }
+                        }
+                        stringPhone = mas_Char_2.toString();
+                    } else {
+                        char[] mas_char_symbol = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".toCharArray();
+                        char[] mas_Char_2 = new char[experimental_phone_or_email.length()];
+                        for (int i = 0; i <= experimental_phone_or_email.length(); i++) {
+                            for (int j = 0; j <= "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".length(); j++) {
+                                if (mas_char_1[i] == mas_char_symbol[j]) {
+                                    mas_Char_2[i] = mas_char_symbol[j];
+                                } else {
+                                    mas_Char_2[i] = ' ';
+                                }
+                            }
+                            if (mas_Char_2[i] == ' ') {
+                                error_number_or_email.setText("Введите верный номер телефона или email");
+                            }
+                        }
+                        stringEmail = mas_Char_2.toString();
+                    }
+                }
+                if (experimental_password.equals("")) {
+                    error_password.setText("Введите пароль");
+                } else {
+                    char[] mas_char_symbol = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".toCharArray();
+                    char[] mas_Char_2 = new char[experimental_password.length()];
+                    char[] mas_char_1 = experimental_password.toCharArray();
+                    for (int i = 0; i <= experimental_password.length(); i++) {
+                        for (int j = 0; j <= "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".length(); j++) {
+                            if (mas_char_1[i] == mas_char_symbol[j]) {
+                                mas_Char_2[i] = mas_char_symbol[j];
+                            } else {
+                                mas_Char_2[i] = ' ';
+                            }
+                        }
+                        if (mas_Char_2[i] == ' ') {
+                            error_password.setText("Введите пароль, длиной более 7 символов, состоящий из букв (A-z), цифр (0-9) и спец. символов");
+                        }
+                    }
+                    stringPassword = mas_Char_2.toString();
+                }
+            }
+
+            private void authorizate(String stringPhone, String stringEmail, String stringPassword) {
+                HashMap<String, String> json = new HashMap<>();
+                json.put("phone", stringPhone);
+                json.put("email", stringEmail);
+                json.put("password", stringPassword);
+
+                Call<UserAuthorization> call = RetrofitClient.getInstance().getMyApi().userAuthorization(json);
+                call.enqueue(new Callback<UserAuthorization>() {
+                    @Override
+                    public void onResponse(Call<UserAuthorization> call, Response<UserAuthorization> response) {
+                        if (response.isSuccessful()) {
+                            sessionId = response.body().sessionId;
+                            Toast.makeText(ActivityLogin.this, sessionId, Toast.LENGTH_SHORT).show();
+                            getTasks();
+                        } else {
+                            try {
+                                JSONObject jsonError = new JSONObject(response.errorBody().string());
+                                String error = jsonError.getString("errors");
+                                Toast.makeText(ActivityLogin.this, error, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
                         }
                     }
-                    if (kol != mas_incoming.length + 1)
-                        error_password.setText("Введите пароль, длиной более 7 символов, состоящий из букв (A-z), цифр (0-9) и спец. символов"); // неверно заполнен пароль
-                    else
-                        stringPassword = password.getText().toString();
-                }
-                */
 
-                authorizate(stringPhone, stringEmail, stringPassword);
-            }
-        });
-    }
-
-    private void authorizate(String stringPhone, String stringEmail, String stringPassword) {
-        HashMap<String, String> json = new HashMap<>();
-        json.put("phone", stringPhone);
-        json.put("email", stringEmail);
-        json.put("password", stringPassword);
-
-        Call<UserAuthorization> call = RetrofitClient.getInstance().getMyApi().userAuthorization(json);
-        call.enqueue(new Callback<UserAuthorization>() {
-            @Override
-            public void onResponse(Call<UserAuthorization> call, Response<UserAuthorization> response) {
-                if (response.isSuccessful()) {
-                    sessionId = response.body().sessionId;
-                    Toast.makeText(ActivityLogin.this, sessionId, Toast.LENGTH_SHORT).show();
-                    getTasks();
-                } else {
-                    try {
-                        JSONObject jsonError = new JSONObject(response.errorBody().string());
-                        String error = jsonError.getString("errors");
-                        Toast.makeText(ActivityLogin.this, error, Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    @Override
+                    public void onFailure(Call<UserAuthorization> call, Throwable t) {
+                        Toast.makeText(ActivityLogin.this, "Error", Toast.LENGTH_SHORT).show();
                     }
-                }
+                });
             }
 
-            @Override
-            public void onFailure(Call<UserAuthorization> call, Throwable t) {
-                Toast.makeText(ActivityLogin.this, "Error", Toast.LENGTH_SHORT).show();
+            private void getTasks() {
+
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Успех!", Toast.LENGTH_SHORT);
+                toast.show();
+
+                //Здесь писать задачи, при успешном входе
+
             }
         });
-    }
-
-    private void getTasks() {
-
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "Успех!", Toast.LENGTH_SHORT);
-        toast.show();
-
-        //Здесь писать задачи, при успешном входе
-
     }
 }

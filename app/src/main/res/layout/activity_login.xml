@@ -73,13 +73,12 @@
 
             <TextView
                 android:id="@+id/error_number_or_email"
-                android:layout_width="wrap_content"
+                android:layout_width="356dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@+id/number_or_email"
                 app:layout_constraintRight_toRightOf="@+id/number_or_email"
                 app:layout_constraintTop_toBottomOf="@+id/number_or_email"
-                android:textColor="@color/Error_color"
-                android:layout_margin="25dp"/>
+                android:textColor="@color/Error_color"/>
 
             <EditText
                 android:id="@+id/password"
@@ -89,26 +88,23 @@
                 app:layout_constraintLeft_toLeftOf="@+id/Main_text_basic"
                 android:hint="Пароль"
                 android:text="a"
-                android:layout_marginTop="20dp"
                 android:inputType="textPassword"
                 android:maxLength="7"/>
 
             <TextView
                 android:id="@+id/error_password"
-                android:layout_width="wrap_content"
+                android:layout_width="356dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@+id/number_or_email"
                 app:layout_constraintRight_toRightOf="@+id/number_or_email"
                 app:layout_constraintTop_toBottomOf="@+id/password"
-                android:textColor="@color/Error_color"
-                android:layout_margin="25dp"/>
+                android:textColor="@color/Error_color"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="256dp"
                 android:layout_height="48dp"
                 app:layout_constraintLeft_toLeftOf="@+id/password"
                 app:layout_constraintTop_toBottomOf="@+id/error_password"
-                android:layout_marginTop="25dp"
                 app:cardCornerRadius="8dp">
 
                 <ImageView
