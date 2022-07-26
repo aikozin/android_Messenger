@@ -42,7 +42,7 @@ public class ActivityLogin extends AppCompatActivity {
 
                 TextView error_number_or_email = findViewById(R.id.error_number_or_email);
                 TextView error_password = findViewById(R.id.error_password);
-
+                //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------<Начало>
                 error_number_or_email.setText("");
                 error_password.setText("");
 
@@ -110,7 +110,7 @@ public class ActivityLogin extends AppCompatActivity {
                     stringPassword = mas_Char_2.toString();
                 }
             }
-
+            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<Конец>
             private void authorizate(String stringPhone, String stringEmail, String stringPassword) {
                 HashMap<String, String> json = new HashMap<>();
                 json.put("phone", stringPhone);
