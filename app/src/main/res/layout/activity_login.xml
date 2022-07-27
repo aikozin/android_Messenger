@@ -67,7 +67,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/Main_text_basic"
                 app:layout_constraintLeft_toLeftOf="@+id/Main_text_basic"
                 android:hint="Телефон или электронная почта"
-                android:text="+70000000000"
+                android:text="+71234567890"
                 android:layout_marginTop="20dp"
                 android:inputType="textEmailAddress"/>
 
@@ -87,7 +87,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/error_number_or_email"
                 app:layout_constraintLeft_toLeftOf="@+id/Main_text_basic"
                 android:hint="Пароль"
-                android:text="qwertyui"
+                android:text="Password!#$"
                 android:inputType="textPassword"/>
 
             <TextView
@@ -100,11 +100,13 @@
                 android:textColor="@color/Error_color"/>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/id_card_2"
                 android:layout_width="256dp"
                 android:layout_height="48dp"
                 app:layout_constraintLeft_toLeftOf="@+id/password"
                 app:layout_constraintTop_toBottomOf="@+id/error_password"
-                app:cardCornerRadius="8dp">
+                app:cardCornerRadius="8dp"
+                android:layout_marginTop="16dp">
 
                 <ImageView
                     android:id="@+id/button_registration"
@@ -134,14 +136,14 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/proverka"
-                android:layout_width="wrap_content"
+                android:id="@+id/error_server"
+                android:layout_width="356dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_card_2"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginBottom="32dp"
-                android:textSize="24dp"/>
+                android:layout_marginTop="15dp"
+                android:textColor="@color/Error_color"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

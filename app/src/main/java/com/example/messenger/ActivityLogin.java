@@ -42,7 +42,6 @@ public class ActivityLogin extends AppCompatActivity {
 
                 TextView error_number_or_email = findViewById(R.id.error_number_or_email);
                 TextView error_password = findViewById(R.id.error_password);
-                //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------<Начало>
                 error_number_or_email.setText("");
                 error_password.setText("");
 
@@ -62,7 +61,7 @@ public class ActivityLogin extends AppCompatActivity {
                             error_number_or_email.setText("Введите верный номер телефона или email");
                             string = "";
                         } else {
-                            string = string.substring(2,11);
+                            string = string.substring(2, 11);
                             stringPhone = "+7" + string;
                         }
                     } else { // дальше все Ок
@@ -96,13 +95,8 @@ public class ActivityLogin extends AppCompatActivity {
                 }
                 string = string.replaceAll("^[А-Яа-я]", "");
                 stringPassword = string;
-
-                TextView proverka = findViewById(R.id.proverka);
-                String proverka_1 = stringPhone + "\n" + stringEmail + "\n" + stringPassword;
-                proverka.setText(proverka_1);
             }
 
-            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<Конец>
             private void authorizate(String stringPhone, String stringEmail, String stringPassword) {
                 HashMap<String, String> json = new HashMap<>();
                 json.put("phone", stringPhone);
@@ -121,7 +115,11 @@ public class ActivityLogin extends AppCompatActivity {
                             try {
                                 JSONObject jsonError = new JSONObject(response.errorBody().string());
                                 String error = jsonError.getString("errors");
-                                Toast.makeText(ActivityLogin.this, error, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ActivityLogin.this, error, Toast.LENGTH_SHORT).show();
+
+                                TextView error_server = findViewById(R.id.error_server);
+                                error_server.setText(error);
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             } catch (IOException e) {
