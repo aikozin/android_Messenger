@@ -95,6 +95,8 @@ public class ActivityLogin extends AppCompatActivity {
                 }
                 string = string.replaceAll("^[А-Яа-я]", "");
                 stringPassword = string;
+
+                authorizate(stringPhone, stringEmail, stringPassword);
             }
 
             private void authorizate(String stringPhone, String stringEmail, String stringPassword) {
