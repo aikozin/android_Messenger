@@ -48,68 +48,60 @@ public class ActivityLogin extends AppCompatActivity {
 
                 String stringPhone = "";
                 String stringEmail = "";
-                String stringPassword = "";
+                String stringPassword;
 
-                String experimental_phone_or_email = number_or_email.getText().toString();
-                String experimental_password = password.getText().toString();
-
-                if (experimental_phone_or_email.equals("")) {
+                String string = number_or_email.getText().toString();
+                string = string.trim();
+                if (string.length() <= 0) {
                     error_number_or_email.setText("Данное поле обязательно для заполнения");
+                    string = "";
                 } else {
-                    char[] mas_char_1 = experimental_phone_or_email.toCharArray();
-                    if (mas_char_1[0] == '+') {
-                        char[] mas_Char_2 = {'+', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-                        char[] mas_char_symbol = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-                        for (int i = 1; i <= 12; i++) {
-                            for (int j = 0; j <= 9; j++) {
-                                if (mas_char_1[i] == mas_char_symbol[j]) {
-                                    mas_Char_2[i] = mas_char_symbol[j];
-                                }
-                            }
-                            if (mas_Char_2[i] == ' ') {
-                                error_number_or_email.setText("Введите верный номер телефона или email");
-                            }
+                    if (string.toCharArray()[0] == '+') { // проблема дальше
+                        string = string.replaceAll("^[A-Za-zА-Яа-я!-/:-~]", "");
+                        if (string.length() != 11) {
+                            error_number_or_email.setText("Введите верный номер телефона или email");
+                            string = "";
+                        } else {
+                            string = string.substring(2,11);
+                            stringPhone = "+7" + string;
                         }
-                        stringPhone = mas_Char_2.toString();
-                    } else {
-                        char[] mas_char_symbol = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".toCharArray();
-                        char[] mas_Char_2 = new char[experimental_phone_or_email.length()];
-                        for (int i = 0; i <= experimental_phone_or_email.length(); i++) {
-                            for (int j = 0; j <= "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".length(); j++) {
-                                if (mas_char_1[i] == mas_char_symbol[j]) {
-                                    mas_Char_2[i] = mas_char_symbol[j];
-                                } else {
-                                    mas_Char_2[i] = ' ';
-                                }
-                            }
-                            if (mas_Char_2[i] == ' ') {
+                    } else { // дальше все Ок
+                        string = string.replaceAll("^[А-Яа-я!-,/:-?^`{-~]", "");
+                        char[] chars_e = new char[string.length()];
+                        int char_n = string.indexOf("@");
+                        if (char_n <= 0) {
+                            error_number_or_email.setText("Введите верный номер телефона или email");
+                            string = "";
+                        } else {
+                            String new_string = string.substring(char_n);
+                            char_n = new_string.indexOf(".");
+                            if (char_n == -1) {
                                 error_number_or_email.setText("Введите верный номер телефона или email");
+                                string = "";
                             }
+                            stringEmail = string;
                         }
-                        stringEmail = mas_Char_2.toString();
                     }
                 }
-                if (experimental_password.equals("")) {
+                string = password.getText().toString();
+                string = string.trim();
+                if (string.equals("")) {
                     error_password.setText("Введите пароль");
+                    string = "";
                 } else {
-                    char[] mas_char_symbol = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".toCharArray();
-                    char[] mas_Char_2 = new char[experimental_password.length()];
-                    char[] mas_char_1 = experimental_password.toCharArray();
-                    for (int i = 0; i <= experimental_password.length(); i++) {
-                        for (int j = 0; j <= "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".length(); j++) {
-                            if (mas_char_1[i] == mas_char_symbol[j]) {
-                                mas_Char_2[i] = mas_char_symbol[j];
-                            } else {
-                                mas_Char_2[i] = ' ';
-                            }
-                        }
-                        if (mas_Char_2[i] == ' ') {
-                            error_password.setText("Введите пароль, длиной более 7 символов, состоящий из букв (A-z), цифр (0-9) и спец. символов");
-                        }
+                    if (string.length() <= 7) {
+                        error_password.setText("Введите пароль, длиной более 7 символов, состоящий из букв (A-z), цифр (0-9) и спец. символов");
+                        string = "";
                     }
-                    stringPassword = mas_Char_2.toString();
                 }
+                string = string.replaceAll("^[А-Яа-я]", "");
+                stringPassword = string;
+
+                TextView proverka = findViewById(R.id.proverka);
+                String proverka_1 = stringPhone + "\n" + stringEmail + "\n" + stringPassword;
+                proverka.setText(proverka_1);
             }
+
             //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<Конец>
             private void authorizate(String stringPhone, String stringEmail, String stringPassword) {
                 HashMap<String, String> json = new HashMap<>();
