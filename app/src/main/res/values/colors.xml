@@ -5,12 +5,13 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <color name="black">#D2000000</color>
     <color name="white">#FFFFFFFF</color>
     // Необходимо оговорить основные тона, пока сделаю такие:
-    <color name="Main_background">#EEDAD393</color>
-    <color name="Main_elements">#E4DA9746</color>
-    <color name="Main_text_header">#EE5B2AB3</color>
-    <color name="Main_text_basic">#E27E2AB3</color>
+    <color name="Main_background">#EFEFEF</color>
+    <color name="Main_elements">#E9CFD9DA</color>
+    <color name="Main_elements_2">#D802A1A0</color>
+    <color name="Main_text_header">#EE0991EC</color>
+    <color name="Main_text_basic">#F5180822</color>
     <color name="Error_color">#E2D80E0E</color>
 </resources>
