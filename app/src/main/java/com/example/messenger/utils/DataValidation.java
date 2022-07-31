@@ -55,9 +55,16 @@ public class DataValidation {
     public String phoneValidation(String phone, String code) {
         String error = "Введите верный номер телефона\n";
 
-        if (phone.equals("+"))
+        /*
+        если строка пустая
+         */
+        if (phone.equals("+") || phone.equals(""))
             return "Заполните все обязательные поля\n";
 
+        /*
+        парсим номер телефона библиотекой. Если она это сделать не может - возвращаем ошибку
+        в переменной error
+         */
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
         Phonenumber.PhoneNumber numberProto = null;
         try {
@@ -66,6 +73,9 @@ public class DataValidation {
             return error;
         }
 
+        /*
+        Если строка с номером телефона короче 8 символов или длиннее 20
+         */
         if (Long.toString(numberProto.getNationalNumber()).length() < 8 ||
                 Long.toString(numberProto.getNationalNumber()).length() > 20)
             return error;
@@ -101,9 +111,16 @@ public class DataValidation {
     public String emailValidation(String email) {
         String error = "Введите верный адрес почтового ящика\n";
 
+        /*
+        если строка пустая
+         */
         if (email.equals(""))
             return "Заполните все обязательные поля\n";
 
+        /*
+        тримируем строку (вырезаем пробелы в начале и конце), приводим к нижнему регистру и проверяем
+        на наличие символов
+         */
         email = email.trim();
         email = email.toLowerCase(Locale.ROOT);
         if (!email.contains("@") || !email.contains("."))
@@ -122,9 +139,15 @@ public class DataValidation {
     public String passwordValidation(String password) {
         String error = "Введите пароль длиной более 7 символов, состоящий \nиз букв (A-z), цифр (0-9) и спец. символов";
 
+        /*
+        если строка пустая
+         */
         if (password.equals(""))
             return "Заполните все обязательные поля\n";
 
+        /*
+        если пароль не содержит символы по регулярному выражению
+         */
         if (!password.matches("(?=.*[A-z])(?=.*[0-9])(?=.*[`~!@#№$;%^:&?*()_=+'|,<.>/])[0-9A-z`~!@#№$;%^:&?*()_=+'|,<.>/]{8,}"))
             return error;
 

@@ -39,9 +39,7 @@ public class FragmentRegistrationConfirm extends Fragment {
     private static final String ARG_EMAIL = "email";
     private static final String ARG_PASSWORD = "password";
 
-    private String phone;
-    private String email;
-    private String password;
+    private String phone, email, password;
 
     private EditText etPhone;
     private TextView tvInfoTimer, tvInfoClicker;
@@ -102,7 +100,7 @@ public class FragmentRegistrationConfirm extends Fragment {
                         tvInfoClicker.setOnClickListener(v -> {
                             FragmentManager fm = getParentFragmentManager();
                             fm.beginTransaction()
-                                    .replace(R.id.fragment_container_view, FragmentLoading.class, null)
+                                    .replace(R.id.cvRegistration, FragmentLoading.class, null)
                                     .commit();
                             
                             HashMap<String, String> json = new HashMap<>();
@@ -118,7 +116,7 @@ public class FragmentRegistrationConfirm extends Fragment {
                                         FragmentRegistrationConfirm fragmentRegistrationConfirm =
                                                 FragmentRegistrationConfirm.newInstance(phone, email, password);
                                         fm.beginTransaction()
-                                                .replace(R.id.fragment_container_view, fragmentRegistrationConfirm)
+                                                .replace(R.id.cvRegistration, fragmentRegistrationConfirm)
                                                 .commit();
                                     } else {
                                         try {
@@ -154,7 +152,7 @@ public class FragmentRegistrationConfirm extends Fragment {
                 if (s.length() == 5) {
                     FragmentManager fm = getParentFragmentManager();
                     fm.beginTransaction()
-                            .replace(R.id.fragment_container_view, FragmentLoading.class, null)
+                            .replace(R.id.cvRegistration, FragmentLoading.class, null)
                             .commit();
 
                     HashMap<String, String> json = new HashMap<>();

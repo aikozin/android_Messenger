@@ -39,9 +39,7 @@ public class FragmentRegistrationGetCode extends Fragment {
     private CardView btRegistration;
     private TextView btSignIn, tvInfo;
 
-    private String phone;
-    private String email;
-    private String password;
+    private String phone,  email, password;
 
     private DataValidation dataValidation;
     private String codeCountry;
@@ -103,7 +101,7 @@ public class FragmentRegistrationGetCode extends Fragment {
 
             FragmentManager fm = getParentFragmentManager();
             fm.beginTransaction()
-                    .replace(R.id.fragment_container_view, FragmentLoading.class, null)
+                    .replace(R.id.cvRegistration, FragmentLoading.class, null)
                     .commit();
 
             HashMap<String, String> json = new HashMap<>();
@@ -123,7 +121,7 @@ public class FragmentRegistrationGetCode extends Fragment {
                                         password
                                 );
                         fm.beginTransaction()
-                                .replace(R.id.fragment_container_view, fragmentRegistrationConfirm)
+                                .replace(R.id.cvRegistration, fragmentRegistrationConfirm)
                                 .commit();
                     } else {
                         try {
