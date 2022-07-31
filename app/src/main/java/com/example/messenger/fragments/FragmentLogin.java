@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,6 +106,12 @@ public class FragmentLogin extends Fragment {
                 tvErrorMessage.setText(passwordValidationMessage);
                 return;
             }
+
+            //вывод фрагмента с анимацией загрузки
+            FragmentManager fm = getParentFragmentManager();
+            fm.beginTransaction()
+                    .replace(R.id.cvRegistration, FragmentLoading.class, null)
+                    .commit();
 
             HashMap<String, String> json = new HashMap<>();
             json.put("phone", phone);
