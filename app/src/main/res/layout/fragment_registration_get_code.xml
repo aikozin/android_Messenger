@@ -53,17 +53,49 @@
                     app:cardCornerRadius="1000dp"
                     android:layout_marginTop="46dp">
 
-                    <EditText
-                        android:id="@+id/etPhone"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Номер телефона"
-                        android:backgroundTint="@android:color/transparent"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginEnd="32dp"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:inputType="phone"/>
+                        android:layout_marginBottom="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:hint="+"
+                            android:textSize="18sp"
+                            android:gravity="center"/>
+
+                        <EditText
+                            android:id="@+id/etPhoneCode"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:hint="Код"
+                            android:backgroundTint="@android:color/transparent"
+                            android:inputType="phone"
+                            android:nextFocusDown="@id/etPhoneNumber"/>
+
+                        <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#ccc"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"/>
+
+                        <EditText
+                            android:id="@+id/etPhoneNumber"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:hint="Номер телефона"
+                            android:backgroundTint="@android:color/transparent"
+                            android:inputType="phone"
+                            android:layout_marginStart="16dp"/>
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -79,8 +111,8 @@
                         android:layout_height="match_parent"
                         android:hint="E-mail"
                         android:backgroundTint="@android:color/transparent"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:inputType="textEmailAddress"/>
@@ -99,8 +131,8 @@
                         android:layout_height="match_parent"
                         android:hint="Пароль"
                         android:backgroundTint="@android:color/transparent"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:inputType="textPassword"/>
@@ -119,8 +151,8 @@
                         android:layout_height="match_parent"
                         android:hint="Подтверждение пароля"
                         android:backgroundTint="@android:color/transparent"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginEnd="32dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:inputType="textPassword"/>

@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.example.messenger.R;
 
+/**
+ * Фрагмент с анимацией загрузки
+ */
 public class FragmentLoading extends Fragment {
 
     public FragmentLoading() {
