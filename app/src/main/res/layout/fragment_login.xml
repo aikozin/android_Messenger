@@ -118,7 +118,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="16dp"
-                android:textColor="#23848A"/>
+                android:textColor="#23848A"
+                android:clickable="true"
+                android:foreground="?android:selectableItemBackground"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btLogin"
@@ -169,7 +171,9 @@
                     android:layout_height="wrap_content"
                     android:text="Зарегистрироваться."
                     android:textSize="18sp"
-                    android:textColor="#23848A"/>
+                    android:textColor="#23848A"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

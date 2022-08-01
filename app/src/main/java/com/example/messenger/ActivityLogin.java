@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.messenger.api.RetrofitClient;
 import com.example.messenger.fragments.FragmentLogin;
+import com.example.messenger.fragments.FragmentRegistrationConfirm;
 import com.example.messenger.fragments.FragmentRegistrationGetCode;
 import com.example.messenger.model.UserAuthorization;
 

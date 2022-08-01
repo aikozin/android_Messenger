@@ -142,6 +142,16 @@ public class FragmentRegistrationGetCode extends Fragment {
             });
         });
 
+        btSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.cvLogin, FragmentLogin.class, null)
+                        .commit();
+            }
+        });
+
         return view;
     }
 
